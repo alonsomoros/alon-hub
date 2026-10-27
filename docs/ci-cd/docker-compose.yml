@@ -1,0 +1,9 @@
+services:
+  alxns-hub:
+    build: ../..
+    ports:
+      - "4173:4173"
+    environment:
+      N8N_METRICS_URL: ${N8N_METRICS_URL}
+      GRAFANA_URL: ${GRAFANA_URL}
+    restart: unless-stopped

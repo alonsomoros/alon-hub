@@ -1,0 +1,8 @@
+flowchart LR
+  UI[React PWA Dashboard] --> AD[Typed Integration Adapters]
+  AD --> N8N[n8n Webhooks]
+  N8N --> PI[Raspberry Pi 5]
+  UI --> HC[Service Healthchecks]
+  HC --> APPS[Production Apps]
+  UI --> LOCAL[Local Habit Store]
+  UI -. detail .-> G[Grafana]
