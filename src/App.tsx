@@ -8,11 +8,21 @@ import type { LucideIcon } from 'lucide-react'
 
 interface Quote { content: string; author: string }
 interface Service { name: string; url: string; state: 'online' | 'offline'; icon: LucideIcon }
-interface QuickLink { id: string; label: string; url: string; icon: LucideIcon }
+interface QuickLink { id: string; label: string; url: string; icon: LucideIcon; logoUrl?: string }
 type GoalCategory = 'reading' | 'movement' | 'learning'
 interface GoalSnapshot { current: number; target: number; recordedAt: string }
 interface HabitGoal { id: string; title: string; description: string; category: GoalCategory; current: number; target: number; unit: string; archived: boolean; history: GoalSnapshot[] }
 interface DashboardConfig { theme: 'soft'; mode: 'light'; quote: 'default' | 'random' | 'fav'; orderServices: string[]; raspberryPiStatsShowcase: 'graph' | 'pbar' }
+
+const resolveLinkLogo = (url: string) => {
+  try {
+    const safeUrl = /^https?:\/\//i.test(url) ? url : `https://${url}`
+    const parsed = new URL(safeUrl)
+    return `https://www.google.com/s2/favicons?sz=128&domain_url=${encodeURIComponent(parsed.origin)}`
+  } catch {
+    return null
+  }
+}
 
 const dashboardConfig: DashboardConfig = {
   theme: 'soft', mode: 'light', quote: 'random', orderServices: ['Hipoglifo.es', 'El Negredo', 'Portfolio'], raspberryPiStatsShowcase: 'pbar',
@@ -76,8 +86,11 @@ function Dashboard() {
     setLinks((current) => [...current, { id: crypto.randomUUID(), label: newLink.label.trim(), url, icon: Link2 }])
     setNewLink({ label: '', url: '' }); setIsAddLinkOpen(false)
   }
-  const reorderLinks = (sourceIndex: number, targetIndex: number) => setLinks((current) => {
-    if (sourceIndex === targetIndex || sourceIndex < 0 || targetIndex < 0 || sourceIndex >= current.length || targetIndex >= current.length) return current
+  const reorderLinks = (sourceId: string, targetId: string) => setLinks((current) => {
+    if (sourceId === targetId) return current
+    const sourceIndex = current.findIndex((link) => link.id === sourceId)
+    const targetIndex = current.findIndex((link) => link.id === targetId)
+    if (sourceIndex < 0 || targetIndex < 0) return current
     const next = [...current]
     const [movedLink] = next.splice(sourceIndex, 1)
     next.splice(targetIndex, 0, movedLink)
@@ -126,10 +139,32 @@ function GoalForm({ goal, onClose, onSave }: { goal: HabitGoal | null; onClose: 
   return <div className="goal-modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.currentTarget === event.target) onClose() }}><section className="goal-modal" role="dialog" aria-modal="true" aria-labelledby="goal-form-title"><div className="form-heading"><strong id="goal-form-title">{goal ? 'Editar reto' : 'Nuevo reto'}</strong><button className="quiet-button" type="button" onClick={onClose} aria-label="Cerrar"><X size={17} /></button></div><label>Título<input value={draft.title} onChange={(event) => update('title', event.target.value)} placeholder="Leer 30 páginas" /></label><label>Descripción<textarea value={draft.description} onChange={(event) => update('description', event.target.value)} placeholder="Describe el objetivo" /></label><label>Categoría<select value={draft.category} onChange={(event) => update('category', event.target.value as GoalCategory)}>{Object.entries(goalCategoryConfig).map(([value, option]) => <option value={value} key={value}>{option.label}</option>)}</select></label><div className="goal-form-fields"><label>Actual<input type="number" min="0" value={draft.current} onChange={(event) => update('current', Number(event.target.value))} /></label><label>Objetivo<input type="number" min="1" value={draft.target} onChange={(event) => update('target', Number(event.target.value))} /></label><label>Unidad<input value={draft.unit} onChange={(event) => update('unit', event.target.value)} placeholder="páginas" /></label></div><span className={`goal-form-preview ${category.color}`}>Progreso: {goalProgress(draft)}%</span><button className="primary-button" type="button" onClick={submit}><Check size={16} /> Guardar reto</button></section></div>
 }
 
-function LinksView({ links, isAddLinkOpen, newLink, onBack, onAdd, onDelete, onReorder, onCloseAdd, onNewLinkChange, onConfirmAdd }: { links: QuickLink[]; isAddLinkOpen: boolean; newLink: { label: string; url: string }; onBack: () => void; onAdd: () => void; onDelete: (id: string) => void; onReorder: (sourceIndex: number, targetIndex: number) => void; onCloseAdd: () => void; onNewLinkChange: (value: { label: string; url: string }) => void; onConfirmAdd: () => void }) {
-  const [draggedIndex, setDraggedIndex] = useState<number | null>(null)
+function LinkBrand({ link }: { link: QuickLink }) {
+  const logoUrl = resolveLinkLogo(link.url)
+  const [imageState, setImageState] = useState<'loading' | 'ready' | 'fallback'>(() => logoUrl ? 'loading' : 'fallback')
+  const Icon = link.icon
 
-  return <section className="subview"><button className="back-button" type="button" onClick={onBack}><ChevronRight size={16} /> Volver</button><div className="subview-heading"><div><p className="date-label">Tu colección</p><h1>Enlaces</h1></div><button className="primary-button" type="button" onClick={onAdd}><Plus size={16} /> Añadir enlace</button></div><div className="editable-links">{links.map((link, index) => <div className={`editable-link ${draggedIndex === index ? 'is-dragging' : ''}`} draggable="true" key={link.id} onDragStart={() => setDraggedIndex(index)} onDragOver={(event) => event.preventDefault()} onDrop={() => { if (draggedIndex !== null) onReorder(draggedIndex, index); setDraggedIndex(null) }} onDragEnd={() => setDraggedIndex(null)}><span className="drag-handle" aria-label={`Arrastrar ${link.label} para reordenar`} title="Arrastrar para reordenar"><GripVertical size={18} /></span><span className="editable-link-icon"><link.icon size={18} /></span><span className="editable-link-text"><strong>{link.label}</strong><small>{link.url}</small></span><a className="quiet-button" href={link.url} target="_blank" rel="noreferrer" aria-label={`Abrir ${link.label}`}><ExternalLink size={16} /></a><button className="delete-button" type="button" onClick={() => onDelete(link.id)} aria-label={`Borrar ${link.label}`}><Trash2 size={16} /></button></div>)}</div>{isAddLinkOpen && <div className="add-link-form"><div className="form-heading"><strong>Nuevo enlace</strong><button className="quiet-button" type="button" onClick={onCloseAdd} aria-label="Cerrar"><X size={17} /></button></div><label>Nombre<input value={newLink.label} onChange={(event) => onNewLinkChange({ ...newLink, label: event.target.value })} placeholder="Mi sitio" /></label><label>Dirección<input value={newLink.url} onChange={(event) => onNewLinkChange({ ...newLink, url: event.target.value })} placeholder="https://..." /></label><button className="primary-button" type="button" onClick={onConfirmAdd}><Check size={16} /> Guardar enlace</button></div>}</section>
+  if (!logoUrl || imageState === 'fallback') {
+    return <span className="editable-link-icon"><Icon size={18} /></span>
+  }
+
+  return <span className="editable-link-icon brand-icon"><img key={logoUrl} src={logoUrl} alt="" onLoad={() => setImageState('ready')} onError={() => setImageState('fallback')} /><span className={`brand-sheen ${imageState === 'loading' ? 'active' : ''}`} aria-hidden="true" /></span>
+}
+
+function LinksView({ links, isAddLinkOpen, newLink, onBack, onAdd, onDelete, onReorder, onCloseAdd, onNewLinkChange, onConfirmAdd }: { links: QuickLink[]; isAddLinkOpen: boolean; newLink: { label: string; url: string }; onBack: () => void; onAdd: () => void; onDelete: (id: string) => void; onReorder: (sourceId: string, targetId: string) => void; onCloseAdd: () => void; onNewLinkChange: (value: { label: string; url: string }) => void; onConfirmAdd: () => void }) {
+  const [draggedId, setDraggedId] = useState<string | null>(null)
+
+  const moveLink = (sourceId: string, direction: -1 | 1) => {
+    const sourceIndex = links.findIndex((link) => link.id === sourceId)
+    const targetIndex = sourceIndex + direction
+    if (sourceIndex < 0 || targetIndex < 0 || targetIndex >= links.length) return
+    onReorder(sourceId, links[targetIndex].id)
+  }
+
+  return <section className="subview"><button className="back-button" type="button" onClick={onBack}><ChevronRight size={16} /> Volver</button><div className="subview-heading"><div><p className="date-label">Tu colección</p><h1>Enlaces</h1></div><button className="primary-button" type="button" onClick={onAdd}><Plus size={16} /> Añadir enlace</button></div><div className="editable-links">{links.map((link, index) => <div className={`editable-link ${draggedId === link.id ? 'is-dragging' : ''}`} draggable={true} key={link.id} tabIndex={0} onKeyDown={(event) => {
+          if (event.key === 'ArrowUp') { event.preventDefault(); moveLink(link.id, -1) }
+          if (event.key === 'ArrowDown') { event.preventDefault(); moveLink(link.id, 1) }
+        }} onDragStart={(event) => { event.dataTransfer.effectAllowed = 'move'; event.dataTransfer.setData('text/plain', link.id); setDraggedId(link.id) }} onDragOver={(event) => event.preventDefault()} onDrop={(event) => { event.preventDefault(); if (draggedId) onReorder(draggedId, link.id); setDraggedId(null) }} onDragEnd={() => setDraggedId(null)}><button className="drag-handle" type="button" aria-label={`Mover ${link.label} arriba o abajo`} title="Mover enlace" onClick={() => moveLink(link.id, index > 0 ? -1 : 1)}><GripVertical size={18} /></button><LinkBrand link={link} /><span className="editable-link-text"><strong>{link.label}</strong><small>{link.url}</small></span><a className="quiet-button" href={link.url} target="_blank" rel="noreferrer" aria-label={`Abrir ${link.label}`}><ExternalLink size={16} /></a><button className="delete-button" type="button" onClick={() => onDelete(link.id)} aria-label={`Borrar ${link.label}`}><Trash2 size={16} /></button></div>)}</div>{isAddLinkOpen && <div className="add-link-form"><div className="form-heading"><strong>Nuevo enlace</strong><button className="quiet-button" type="button" onClick={onCloseAdd} aria-label="Cerrar"><X size={17} /></button></div><label>Nombre<input value={newLink.label} onChange={(event) => onNewLinkChange({ ...newLink, label: event.target.value })} placeholder="Mi sitio" /></label><label>Dirección<input value={newLink.url} onChange={(event) => onNewLinkChange({ ...newLink, url: event.target.value })} placeholder="https://..." /></label><button className="primary-button" type="button" onClick={onConfirmAdd}><Check size={16} /> Guardar enlace</button></div>}</section>
 }
 
 function CardTitle({ icon, title, meta, status, badge }: { icon: React.ReactNode; title: string; meta: string; status?: 'online' | 'offline'; badge?: string }) { return <div className="card-title"><div className="title-icon">{icon}</div><div><h2>{title}</h2><span>{meta}</span></div>{badge && <span className="card-title-badge">{badge}</span>}{status && <span className={`tiny-status ${status}`}><i /> {status === 'online' ? 'Activo' : 'No disponible'}</span>}</div> }
