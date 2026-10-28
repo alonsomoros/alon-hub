@@ -14,6 +14,7 @@ Toda funcionalidad nueva debe tener una issue de GitHub y un requisito `REQ-XXX`
 - [ ] Persistir retos e historial localmente y añadir tests de caja negra para `REQ-008`.
 - [x] `REQ-009`: corregir drag and drop accesible de enlaces y resolver logos remotos con fallback (`Issues/009-enlaces-drag-y-branding.md`).
 - [ ] `REQ-010`: mostrar logos configurados de los sitios con fallback compartido (`Issues/010-sitios-branding.md`).
+- [x] `REQ-013`: consolidar branding real de la app y del icono de instalación PWA con `logo.png` (`Issues/013-branding-asset.md`).
 - [ ] `REQ-011`: definir contrato y transporte de métricas Raspberry mediante push/polling o tiempo real (`Issues/011-telemetria-raspberry.md`).
 
 - [ ] Adaptador n8n para métricas de Raspberry Pi 5.

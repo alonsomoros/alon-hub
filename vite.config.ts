@@ -7,7 +7,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react(), tailwindcss(), VitePWA({
     registerType: 'autoUpdate',
-    includeAssets: ['favicon.svg'],
+    includeAssets: ['favicon.svg', 'logo.png'],
     manifest: {
       name: 'alXns Central Hub',
       short_name: 'alXns Hub',
@@ -16,7 +16,11 @@ export default defineConfig({
       background_color: '#080c14',
       display: 'standalone',
       start_url: '/',
-      icons: [{ src: '/favicon.svg', sizes: 'any', type: 'image/svg+xml' }],
+      icons: [
+        { src: '/logo.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+        { src: '/logo.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+        { src: '/logo.png', sizes: '512x512', type: 'image/png', purpose: 'maskable any' },
+      ],
     },
   })],
 })

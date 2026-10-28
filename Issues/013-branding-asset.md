@@ -4,17 +4,21 @@
 
 La marca principal de la UI estaba usando texto o un símbolo provisional (`AX`) en lugar del asset real del producto disponible en `src/assets/logo.png`.
 
-Esto genera inconsistencias visuales entre la carga, la cabecera y el branding global. También hace que la app se sienta menos pulida y menos identificable como producto.
+Además, el manifest PWA seguía apuntando a un icono anterior (`/favicon.svg` con branding morado y tipo rayo), por lo que en la instalación móvil seguía apareciendo el icono incorrecto aunque la app ya mostrase el nuevo logo en las vistas.
+
+Esto genera inconsistencias visuales entre la carga, la cabecera, el branding global y la instalación como app nativa.
 
 ## Solución propuesta
 
-- Usar `src/assets/logo.png` como único activo de marca para:
+- Usar `src/assets/logo.png` como activo principal para:
   - splash screen,
   - header,
   - cabecera de páginas principales,
-  - cualquier marca institucional del producto.
+  - favicon del navegador,
+  - manifest PWA / icono de instalación.
 - Mantener el texto `alXns` como complemento, no como sustituto del logo.
 - Diseñar el contenedor para que el logo conserve proporción y no se deforme en móvil.
+- Ajustar ligeramente la escala del logo para mantenerlo más compacto en la UI.
 
 ## Criterios de aceptación
 
