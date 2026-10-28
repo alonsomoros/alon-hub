@@ -6,7 +6,7 @@ El webhook de n8n debe devolver JSON con `cpuBusyPercent`, `ramUsedPercent`, `st
 
 ## Healthchecks
 
-Los endpoints configurados serán `hipoglifo.es`, `elnegredo.vercel.app` y `alxns.github.io`. La respuesta normalizada incluye `name`, `url`, `state`, `latencyMs` y `checkedAt`.
+Los endpoints configurados serán `hipoglifo.es`, `el-negredo.vercel.app` y `alonsomoros.github.io`. La respuesta normalizada incluye `name`, `url`, `state`, `latencyMs` y `checkedAt`.
 
 ## Grafana
 

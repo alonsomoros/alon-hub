@@ -5,6 +5,7 @@ import {
   Sparkles, Target, Trash2, Trophy, Wifi, X, Zap, GripVertical,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
+import logoApp from './assets/logo.png'
 
 interface Quote { content: string; author: string }
 interface Service { name: string; url: string; state: 'online' | 'offline'; icon: LucideIcon }
@@ -30,8 +31,8 @@ const dashboardConfig: DashboardConfig = {
 const fallbackQuote: Quote = { content: 'La sencillez es la máxima sofisticación.', author: 'Leonardo da Vinci' }
 const services: Service[] = [
   { name: 'Hipoglifo.es', url: 'https://hipoglifo.es', state: 'online', icon: Globe2 },
-  { name: 'El Negredo', url: 'https://elnegredo.vercel.app', state: 'online', icon: Sparkles },
-  { name: 'Portfolio', url: 'https://alxns.github.io', state: 'online', icon: Link2 },
+  { name: 'El Negredo', url: 'https://el-negredo.vercel.app', state: 'online', icon: Sparkles },
+  { name: 'Portfolio', url: 'https://alonsomoros.github.io', state: 'online', icon: Link2 },
 ]
 const defaultLinks: QuickLink[] = [
   { id: 'cubari', label: 'One Piece Cubari', url: 'https://cubari.moe', icon: BookOpen },
@@ -57,7 +58,7 @@ function App() {
 }
 
 function SplashScreen() {
-  return <main className="splash-screen" aria-label="Cargando alXns Central Hub"><div className="splash-content"><div className="brand-mark brand-mark-large">AX</div><h1>alXns</h1><div className="loading-track"><div className="loading-fill" /></div></div></main>
+  return <main className="splash-screen" aria-label="Cargando alXns Central Hub"><div className="splash-content"><img className="brand-mark brand-mark-large" src={logoApp} alt="alXns logo" /><h1>alXns</h1><div className="loading-track"><div className="loading-fill" /></div></div></main>
 }
 
 function Dashboard() {
@@ -110,7 +111,7 @@ function Dashboard() {
   const openEditGoal = (goal: HabitGoal) => { setEditingGoal(goal); setIsGoalFormOpen(true) }
 
   return <main className="app-shell">
-    <header className="site-header"><button className="brand-lockup" type="button" onClick={() => setActiveView('home')}><div className="brand-mark">AX</div><span>alXns</span></button><nav className="main-nav" aria-label="Navegación principal"><button className={activeView === 'home' ? 'active' : ''} type="button" onClick={() => setActiveView('home')}>Inicio</button><button className={activeView === 'goals' ? 'active' : ''} type="button" onClick={() => setActiveView('goals')}>Retos</button><button className={activeView === 'links' ? 'active' : ''} type="button" onClick={() => setActiveView('links')}>Enlaces</button></nav></header>
+    <header className="site-header"><button className="brand-lockup" type="button" onClick={() => setActiveView('home')} aria-label="Volver al inicio"><img className="brand-mark" src={logoApp} alt="alXns logo" /><span>alXns</span></button><nav className="main-nav" aria-label="Navegación principal"><button className={activeView === 'home' ? 'active' : ''} type="button" onClick={() => setActiveView('home')}>Inicio</button><button className={activeView === 'goals' ? 'active' : ''} type="button" onClick={() => setActiveView('goals')}>Retos</button><button className={activeView === 'links' ? 'active' : ''} type="button" onClick={() => setActiveView('links')}>Enlaces</button></nav></header>
     {activeView === 'home' && <HomeView quote={quote} links={links} goals={goals} onOpenGoals={() => setActiveView('goals')} onOpenLinks={() => setActiveView('links')} />}
     {activeView === 'goals' && <GoalsView goals={goals} onBack={() => setActiveView('home')} onAdd={openNewGoal} onEdit={openEditGoal} onArchive={archiveGoal} />}
     {activeView === 'links' && <LinksView links={links} isAddLinkOpen={isAddLinkOpen} newLink={newLink} onBack={() => setActiveView('home')} onAdd={() => setIsAddLinkOpen(true)} onDelete={(id) => setLinks((current) => current.filter((link) => link.id !== id))} onReorder={reorderLinks} onCloseAdd={() => setIsAddLinkOpen(false)} onNewLinkChange={setNewLink} onConfirmAdd={addLink} />}
