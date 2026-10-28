@@ -7,7 +7,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react(), tailwindcss(), VitePWA({
     registerType: 'autoUpdate',
-    includeAssets: ['favicon.svg', 'logo.png'],
+    includeAssets: ['favicon.svg', 'logo_app.png'],
     manifest: {
       name: 'alXns Central Hub',
       short_name: 'alXns Hub',
