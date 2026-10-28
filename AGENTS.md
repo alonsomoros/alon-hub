@@ -17,6 +17,7 @@ PWA rápida y privada para centralizar infraestructura self-hosted, estado de ap
 - Mantén TypeScript estricto y componentes desacoplados.
 - Las peticiones externas no deben bloquear la interfaz: usa skeletons, timeouts de 1.5 s y estados `OFFLINE / UNREACHABLE`.
 - Actualiza el skill correspondiente cuando añadas endpoints, integraciones o widgets.
+- Para mapas de arquitectura, pantallas, datos o entrega, usa `.agents/skills/diagrams.md` mediante `/diagrams`; mantén SVG y Mermaid sincronizados con la realidad del código.
 - Mantén los diagramas Mermaid de `docs/diagramas/` sincronizados.
 
 ## Commands

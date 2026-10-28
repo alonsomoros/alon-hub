@@ -11,6 +11,7 @@ Cada nota distingue el problema observado, la solución propuesta y la decisión
 - [Parámetros y preferencias](003-parametros-y-preferencias.md): configuración preparada, pantalla pospuesta.
 - [Arquitectura e integraciones](004-arquitectura-e-integraciones.md): datos estáticos ahora, adaptadores tipados después.
 - [CI/CD y trazabilidad](005-cicd-trazabilidad.md): flujo obligatorio de issue, tests, commit, push y cierre.
+- [Diagramas y arquitectura](006-diagrams.md): skill `/diagrams`, analisis y SVG sincronizados.
 
 ## Entrega
 

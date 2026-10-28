@@ -9,3 +9,13 @@ El cliente React renderiza un shell PWA inmediato orientado a una primera impres
 3. Preferencias: tema, modo claro/oscuro, fuente de citas, orden de servicios y showcase de métricas.
 4. Integración: clientes HTTP con timeout, reintentos limitados y fallback.
 5. Infraestructura: n8n, Grafana, Raspberry Pi 5 y servicios desplegados.
+
+## Estado verificado
+
+- Implementado: shell PWA, splash, navegacion Inicio/Retos/Enlaces, estado local React y fallback de cita.
+- Preparado: manifest/service worker PWA y contratos/documentacion para preferencias.
+- Pendiente: adaptadores n8n/Grafana, healthchecks reales, persistencia y tests E2E.
+
+## Diagramas
+
+La vista SVG se mantiene en `docs/diagramas/` mediante la skill `/diagrams`: arquitectura, pantallas, datos y entrega CI/CD. La fuente textual base es `docs/diagramas/architecture-diagrams.mmd`.
