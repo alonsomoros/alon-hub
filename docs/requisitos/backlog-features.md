@@ -8,6 +8,13 @@ Toda funcionalidad nueva debe tener una issue de GitHub y un requisito `REQ-XXX`
 
 - [x] Skill `/diagrams` y diagramas SVG de arquitectura, pantallas, datos y CI/CD (`REQ-006`).
 
+## Propuestas en debate
+
+- [ ] `REQ-008`: separar racha del porcentaje y permitir alta/edición de retos con título, descripción, categoría y progreso derivado (`Issues/008-retos-y-progreso.md`).
+- [ ] `REQ-009`: corregir drag and drop accesible de enlaces y resolver logos remotos con fallback (`Issues/009-enlaces-drag-y-branding.md`).
+- [ ] `REQ-010`: mostrar logos configurados de los sitios con fallback compartido (`Issues/010-sitios-branding.md`).
+- [ ] `REQ-011`: definir contrato y transporte de métricas Raspberry mediante push/polling o tiempo real (`Issues/011-telemetria-raspberry.md`).
+
 - [ ] Adaptador n8n para métricas de Raspberry Pi 5.
 - [ ] Implementar `raspberryPiStatsShowcase: graph` con gráficas ligeras y accesibles.
 - [ ] Healthchecks reales con timeout y fallback offline.

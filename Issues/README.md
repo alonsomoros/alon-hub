@@ -13,6 +13,10 @@ Cada nota distingue el problema observado, la solución propuesta y la decisión
 - [CI/CD y trazabilidad](005-cicd-trazabilidad.md): flujo obligatorio de issue, tests, commit, push y cierre.
 - [Diagramas y arquitectura](006-diagrams.md): skill `/diagrams`, analisis y SVG sincronizados.
 - [Gobierno del flujo de agentes](007-agent-governance.md): preflight, dueños documentales y gates de entrega.
+- [Retos, racha y edición](008-retos-y-progreso.md): propuesta para crear y editar retos con progreso derivado.
+- [Enlaces arrastrables y branding](009-enlaces-drag-y-branding.md): propuesta para drag and drop accesible y logos remotos.
+- [Sitios con branding](010-sitios-branding.md): propuesta para logos de servicios con fallback.
+- [Telemetría Raspberry](011-telemetria-raspberry.md): alternativas de polling, push y tiempo real.
 
 ## Entrega
 
