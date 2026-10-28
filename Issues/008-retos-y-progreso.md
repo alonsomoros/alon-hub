@@ -2,7 +2,7 @@
 
 ## Estado
 
-Borrador para debate. No implementado. Requisito propuesto: `REQ-008`.
+Implementado en memoria. Requisito: `REQ-008`.
 
 ## Problema
 
@@ -44,14 +44,14 @@ interface HabitGoal {
 3. Rango como texto libre: flexible, pero difícil de validar y representar.
 4. Rango numérico con unidad: más accesible para barras y métricas.
 
-## Preguntas para decidir
+## Decisiones adoptadas
 
-- ¿El rango debe aceptar unidades como páginas, sesiones, minutos y días?
-- ¿Se puede superar el objetivo o se muestra siempre como 100%?
-- ¿Editar permite cambiar categoría y valores sin perder el historial?
-- ¿Se necesita archivar/eliminar retos?
-- ¿La racha se calcula del historial o permanece como dato visual estático en esta fase?
+- El rango usa número actual, objetivo y unidad libre; las categorías iniciales son Lectura, Movimiento y Aprendizaje.
+- Se permite superar el objetivo; la barra y el porcentaje visual se limitan a 100%.
+- Al editar actual/objetivo se conserva un snapshot en el historial en memoria.
+- Se incluye archivar; eliminar y duplicar quedan fuera.
+- La racha permanece temporal/estática en esta fase y aparece junto al título, sin porcentaje.
 
 ## Impacto previsto
 
-Actualizar `src/App.tsx`, modelos de dominio y estilos; añadir tests de caja negra para alta, edición, validación, derivación de porcentaje y racha. Actualizar requisitos, backlog y flujo de pantallas. No crear ADR hasta decidir persistencia o modelo transversal.
+Actualizados `src/App.tsx` y `src/index.css` con modelo, alta, edición, archivado, categorías, historial en memoria y porcentaje derivado. Pendiente añadir tests de caja negra y persistencia local; no crear ADR hasta decidir el store.

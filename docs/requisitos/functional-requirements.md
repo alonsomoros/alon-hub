@@ -12,3 +12,4 @@
 - **FR-05 Hábitos:** mostrar logros de forma visual y rewarding, con progreso por color y navegación a una vista de retos escalable.
 - **FR-06 Enlaces:** permitir añadir, borrar, abrir y reordenar accesos desde una vista dedicada.
 - **FR-07 PWA:** instalarse como aplicación standalone y funcionar con shell precacheado.
+- **FR-09 Retos:** permitir crear, editar y archivar retos con título, descripción, categoría, unidad, valor actual y objetivo; derivar el porcentaje y limitarlo visualmente al 100%; mostrar la racha junto al título sin porcentaje y conservar snapshots de progreso durante la sesión.
