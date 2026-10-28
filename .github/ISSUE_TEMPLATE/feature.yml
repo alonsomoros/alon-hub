@@ -1,0 +1,41 @@
+name: Nueva funcionalidad
+description: Registrar una funcionalidad con requisitos, tests y trazabilidad
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema
+      description: Qué comportamiento o necesidad motiva el cambio.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Solución propuesta y decisión
+      description: Alternativas consideradas y solución elegida.
+    validations:
+      required: true
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Requisitos y criterios de aceptación
+      description: Añade IDs REQ-XXX y condiciones verificables.
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Tests
+      description: Tests que deben ejecutarse o añadirse para cerrar la issue.
+    validations:
+      required: true
+  - type: textarea
+    id: traceability
+    attributes:
+      label: Trazabilidad
+      description: Archivos de Issues, documentación, commit y dependencias relacionadas.
+    validations:
+      required: true

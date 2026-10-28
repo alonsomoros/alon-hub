@@ -1,5 +1,9 @@
 # Requisitos funcionales
 
+## Trazabilidad y entrega
+
+- **FR-00:** toda funcionalidad debe estar vinculada a una issue de GitHub, un requisito `REQ-XXX`, criterios de aceptación y evidencia de tests; solo se considera cerrada después de commit trazable, push y CI verde.
+
 - **FR-01 Splash:** mostrar una pantalla de bienvenida breve y pasar al dashboard sin bloquear por red.
 - **FR-02 Inicio:** mostrar logo, nombre, fecha y una cita personalizada responsive con autor y fallback local.
 - **FR-03 Infraestructura:** presentar Raspberry Pi 5 con indicador discreto y CPU, memoria y temperatura en un componente visual configurable (`graph` o `pbar`).
