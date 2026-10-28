@@ -17,6 +17,12 @@ Cada nota distingue el problema observado, la solución propuesta y la decisión
 - [Enlaces arrastrables y branding](009-enlaces-drag-y-branding.md): propuesta para drag and drop accesible y logos remotos.
 - [Sitios con branding](010-sitios-branding.md): propuesta para logos de servicios con fallback.
 - [Telemetría Raspberry](011-telemetria-raspberry.md): alternativas de polling, push y tiempo real.
+- [Revisión global de código y branding](012-code-review-global.md): hallazgos de mantenimiento, UX y branding para priorizar mejora.
+- [Branding con asset real en la app](013-branding-asset.md): usar el logo oficial del producto en la UI principal.
+- [Separar datos mock y configuración real](014-mock-data.md): aislar prototipos del flujo real.
+- [Centralizar la resolución del logo de enlaces](015-link-logo-resolver.md): unificar la lógica de marcas y fallbacks.
+- [Refactor de arquitectura del archivo principal](016-app-architecture.md): reducir la carga de responsabilidades en `App.tsx`.
+- [Fecha dinámica en la pantalla principal](017-date-dynamic.md): derivar la fecha del sistema en lugar de hardcodearla.
 
 ## Entrega
 
