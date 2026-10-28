@@ -12,7 +12,8 @@ Cada nota distingue el problema observado, la solución propuesta y la decisión
 - [Arquitectura e integraciones](004-arquitectura-e-integraciones.md): datos estáticos ahora, adaptadores tipados después.
 - [CI/CD y trazabilidad](005-cicd-trazabilidad.md): flujo obligatorio de issue, tests, commit, push y cierre.
 - [Diagramas y arquitectura](006-diagrams.md): skill `/diagrams`, analisis y SVG sincronizados.
+- [Gobierno del flujo de agentes](007-agent-governance.md): preflight, dueños documentales y gates de entrega.
 
 ## Entrega
 
-La skill operativa es `.agents/skills/cicd-github-delivery.md`. Toda funcionalidad debe tener issue de GitHub y requisito `REQ-XXX`; la issue solo se cierra tras validación local, push y CI verde.
+La skill operativa es `.agents/skills/cicd-github-delivery.md`. Toda funcionalidad debe tener issue de GitHub y requisito `REQ-XXX`; la issue solo se cierra tras validación local, push, CI verde y confirmación explícita del desarrollador.

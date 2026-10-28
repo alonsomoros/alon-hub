@@ -12,7 +12,7 @@ Documentar visualmente el sistema sin separar el diagrama de la realidad del rep
 
 ## Flujo
 
-1. Leer `AGENTS.md`, `Issues/README.md`, `.agents/context/system-status.md`, la arquitectura y los requisitos relacionados.
+1. Leer `AGENTS.md`, `WORKFLOW.md`, `CODE_STANDARD.md`, `context/INDEX.md`, `context/STYLE_GUIDE.md`, `Issues/README.md`, `.agents/context/system-status.md`, la arquitectura y los requisitos relacionados.
 2. Inspeccionar entrypoints, componentes, scripts, integraciones y workflow CI. Distinguir `IMPLEMENTADO`, `PREPARADO` y `PENDIENTE`.
 3. Elegir el diagrama solicitado: `architecture`, `screens`, `data`, `delivery` o `all`.
 4. Generar SVG accesible con `title`, `desc`, viewBox estable, tipografia legible, flechas con marcador y leyenda de estados. No usar imagenes externas ni texto que contradiga el codigo.
